@@ -8,6 +8,6 @@ Our website visualises data for users. Our plots include, danger levels of each 
 
 Shiny Link:
 
-https://paquan.shinyapps.io/project-section-bc-6-phu-baron/?_ga=2.175742437.651197295.1678225548-257535426.1678225548
+ https://baronkc42.shinyapps.io/project-section-bc-6-phu-baron/
 
 
