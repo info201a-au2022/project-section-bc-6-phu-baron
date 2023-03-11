@@ -85,11 +85,13 @@ ui <- fluidPage(
               .js-irs-0 .irs-from, .js-irs-0 .irs-to {bottom: -20px !important;}
               .js-irs-0 .irs-grid-pol {bottom: -15px !important;}") # customize the slider style
     ),
+    ##This tab compares the variables to each other, you can see things like which crime type made up of the total crimes
     tabPanel("A better insight",
              sidebarLayout(
                sidebarPanel(
                  selectInput("cities", "Select a city",
                              choices = unique(df$Cities)),
+                             ## Make it so you can select the variables of the data on the sidebar to do a side by side bar chart comparison
                  checkboxGroupInput("variables", "Select variables to display", 
                                     choices = c(colnames(df)[colnames(df) != "Cities"]),
                                     selected = c("Population", "Total Offenses", 
@@ -100,6 +102,7 @@ ui <- fluidPage(
                )
              )
     ),
+    ##scatter plot side panel so you can compare all cities by their total crimes to population, you are able to see a general trend in total crimes to population
     tabPanel("Scatter Plot",
              fluidRow(
                column(width = 12,
@@ -109,6 +112,7 @@ ui <- fluidPage(
                       sliderInput("slider1", "Plot zoomer: 0 = zoom in, 100 = zoom out", min = 0, max = 100, value = 50))
              )
     ),
+    ##tabpanel so that you can sort by population or total offenses in a dropdown, or you can do it manually using the arrows on the table
     tabPanel("Sort by Population or Total Offenses",
              sidebarLayout(
                sidebarPanel(
@@ -217,7 +221,7 @@ server <- function(input, output) {
            x = "City", y = "Danger Level") +
       theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
   })
-  ##Render out the table to compare the highest and lowest city in each category, also makes it ascending/descending order
+  ##Render out the table to compare the highest and lowest city in each category, also makes it ascending/descending order. Uses if statements depending on which option in the drop down menu is chosen
   output$table <- DT::renderDataTable({
     ##Drop down menu sort by ascending and descending for sort by population and total crime
     if (is.null(input$sort_by)) {
